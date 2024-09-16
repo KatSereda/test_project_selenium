@@ -1,5 +1,6 @@
 from .base_page import BasePage
 from .locators import ProductPageLocators
+from .locators import BasePageLocators
 
 class ProductPage(BasePage):
     def add_to_basket(self):
@@ -19,3 +20,11 @@ class ProductPage(BasePage):
         message_price = self.browser.find_element(*ProductPageLocators.PRICE_IN_MESSAGE)
         assert message_price, "Product isn't adding to the basket"
         assert product_price.text == message_price.text, "Product's price is incorrect"
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.MESSAGE_ADDING), \
+            "Success message is presented, but should not be"
+
+    def should_disappeared(self):
+        assert self.is_disappeared(*ProductPageLocators.MESSAGE_ADDING), \
+            "Success message is not disappeared"
