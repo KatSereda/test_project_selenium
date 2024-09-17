@@ -29,3 +29,12 @@ class ProductPage(BasePage):
     def should_disappeared(self):
         assert self.is_disappeared(*ProductPageLocators.MESSAGE_ADDING), \
             "Success message is not disappeared"
+
+    def should_not_be_product_in_basket(self):
+        assert self.is_not_element_present(*BasketPageLocators.PRODUCT), "Product is presented, but should not be"
+        #Ожидаем, что в корзине нет товаров
+
+    def should_empty_basket(self):
+        assert self.is_element_present(*BasketPageLocators.MESSAGE_BASKET), "Basket isn't empty"
+
+           
